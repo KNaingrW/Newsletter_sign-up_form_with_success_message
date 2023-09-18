@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Frontend Mentor | Newsletter sign-up form with success message</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin-top: 15px;
+    }
+    #emailValidationMessage {
+      color: red;
+      display: none;
+    }
+    .input label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="fonts-and-para">
+      <h1>Stay updated!</h1>
+      <p>Join 60,000+ product managers receiving monthly updates on:</p>
+      <div class="list">
+        <li><img src="assets/images/icon-list.svg">Product discovery and building what matters</li>
+        <li><img src="assets/images/icon-list.svg">Measuring to ensure updates are a success</li>
+        <li><img src="assets/images/icon-list.svg">And much more!</li>
+      </div>
+      <div class="input">
+        <label for="email">
+          Email address
+          <span id="emailValidationMessage" style="color: red; display: none;">Valid email required</span>
+        </label>
+        <input type="email" id="email" placeholder="email@company.com" required>
+        <button type="submit" id="subscribeBtn">Subscribe to monthly newsletter</button>
+      </div>
+    </div>
+    <div class="images">
+      <img src="assets/images/illustration-sign-up-desktop.svg">
+      <img src="assets/images/illustration-sign-up-mobile.svg" class="mobile-image">
+    </div>
+  </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const emailInput = document.getElementById("email");
+      const subscribeBtn = document.getElementById("subscribeBtn");
+      const emailValidationMessage = document.getElementById("emailValidationMessage");
+
+      subscribeBtn.addEventListener("click", function (event) {
+        const email = emailInput.value.trim();
+
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!emailPattern.test(email)) {
+          emailValidationMessage.style.display = "inline";
+          emailInput.style.borderColor = "red";
+          event.preventDefault();
+        } else {
+          emailValidationMessage.style.display = "none";
+          emailInput.style.borderColor = "";
+          window.location.href = `thanks.html?email=${encodeURIComponent(email)}`;
+        }
+      });
+    });
+  </script>
+</body>
+</html>
